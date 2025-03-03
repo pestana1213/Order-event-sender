@@ -10,7 +10,6 @@ public class KafkaService {
     @Autowired
     private KafkaTemplate<String, String> kafkaTemplate;
 
-    // Method to send messages to a topic
     public void sendMessage(String topic, String message) {
         kafkaTemplate.send(topic, message);
     }
