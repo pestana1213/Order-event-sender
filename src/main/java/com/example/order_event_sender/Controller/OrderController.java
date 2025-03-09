@@ -22,10 +22,10 @@ public class OrderController {
         kafkaService.sendMessage(CREATE_ORDER, order.toString());
     }
 
-    @PostMapping("{orderId}/update")
+    @PostMapping("/update")
     public void updateOrderStatus(@RequestParam String orderId, @RequestParam String status) throws Exception {
         try {
-            OrderStatus statusEnum = OrderStatus.valueOf(status);
+            OrderStatus statusEnum = OrderStatus.valueOf(status.toUpperCase());
             kafkaService.sendMessage(UPDATE_ORDER, orderId + " " + statusEnum.getDescription());
         }
         catch (IllegalArgumentException e) {
